@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "530439840994",
+    "project_id": "yellowscene-auth",
+    "storage_bucket": "yellowscene-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:530439840994:android:b5ace08799fdfc873b2abb",
+        "android_client_info": {
+          "package_name": "com.learn_react"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "530439840994-f76h9laf5c3m2b021itio235ukvklmi8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.learn_react",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "530439840994-134610i4bbp67cvcrt9414bg28jk84lr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnug0lprtuRbX_Csgecm11CAjnbFfwaQ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "530439840994-134610i4bbp67cvcrt9414bg28jk84lr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
