@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react';
-import { Text, View } from 'react-native';
-import { styles } from './style';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -16,7 +14,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen name="Login" component={GoogleLogin} />
-        <Stack.Screen name="music" component={Musicplayerui} />
+        <Stack.Screen name="music" options={{ title: 'My Music Album' }} component={Musicplayerui} />
       </Stack.Navigator>
     </NavigationContainer>
   )

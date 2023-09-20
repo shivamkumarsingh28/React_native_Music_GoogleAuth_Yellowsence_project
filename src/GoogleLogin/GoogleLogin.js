@@ -17,7 +17,8 @@ export default function App({navigation}) {
       const userInfo = await GoogleSignin.signIn();
       console.log("UserInfo", userInfo);
       setSuccess(userInfo)
-      navigation.navigate("music")
+      navigation.navigate("music", { name: `${userInfo.user.givenName }`})
+      navigation.setOptions({ headerTitle: `${userInfo.user.givenName }`});
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
@@ -43,16 +44,23 @@ export default function App({navigation}) {
   };
 
   return (
-    <View>
-      {success !=null && <Text style={{color: 'white'}}>{success.user.name}</Text>}
-      {success !=null && <Text style={{color: 'white'}}>{success.user.email}</Text>}
-      {success !=null && <Image source={{uri:success.user.photo}} style={{width:100, height:100}}/>}
+    <View style={styles.container}>
+      {success !=null && <Text style={{color: 'black', fontWeight:'bold'}}>{success.user.name}</Text>}
+      {success !=null && <Text style={{color: 'black', fontWeight:'bold'}}>{success.user.email}</Text>}
+      {success !=null && <Image source={{uri:success.user.photo}} style={{width:100, height:100, marginBottom: 10}}/>}
 
       {success == null ? (<TouchableOpacity style={styles.btnstyle} onPress={() => { GoogleLogin() }}>
         <Text>Sign In</Text>
-      </TouchableOpacity>) : (<TouchableOpacity style={styles.btnstyle} onPress={() => { GoogleSignOut() }}>
+      </TouchableOpacity>) : (
+        <>
+      <TouchableOpacity style={styles.btnstyle} onPress={() => { GoogleSignOut() }}>
         <Text>Sign Out</Text>
-      </TouchableOpacity>)}
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.btnstyle} onPress={() => { navigation.navigate("music", { name: `${success.user.givenName }`}) }}>
+      <Text>Go To {success.user.givenName} Music</Text>
+    </TouchableOpacity></>
+      )}
 
 
     </View>

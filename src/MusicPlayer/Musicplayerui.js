@@ -14,8 +14,8 @@ import {SECTIONS} from './Data';
 import LinearGradient from 'react-native-linear-gradient';
 import { styles } from './musicplayerstyle';
 
-export default function Musicplayerui({navigation}) {
-
+export default function Musicplayerui({route, navigation}) {
+  const {name} = route.params;
   const PlaylistImageView = () => (
     <>
       <LinearGradient
@@ -69,7 +69,7 @@ const ListItem = ({ item }) => {
       
       <View style={[styles.widgetContainer]}>
         <Text style={styles.musicTitle} onPress={() => {
-              Linking.openURL('https://www.youtube.com/channel/UC03GH9NoxcHMtnDRTG6hZcQ'); }}>My Music Channel</Text>
+              Linking.openURL('https://www.youtube.com/channel/UC03GH9NoxcHMtnDRTG6hZcQ'); }}>{name} Music Channel</Text>
       </View>
       <FlatList
         data={musiclibrary}
