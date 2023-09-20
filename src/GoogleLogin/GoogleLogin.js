@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react';
-import { TouchableOpacity, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { TouchableOpacity, Text, View, Image } from 'react-native';
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 import { styles } from './googleloginstyle';
 
-export default function App() {
+export default function App({navigation}) {
+  const [success, setSuccess] = useState(null);
+
   useEffect(() => {
-    GoogleSignin.configure();
+    GoogleSignin.configure({webClientId: '530439840994-134610i4bbp67cvcrt9414bg28jk84lr.apps.googleusercontent.com'});
   }, []);
 
   // Somewhere in your code
@@ -14,6 +16,8 @@ export default function App() {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       console.log("UserInfo", userInfo);
+      setSuccess(userInfo)
+      navigation.navigate("music")
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
@@ -29,11 +33,28 @@ export default function App() {
   };
 
 
+ const GoogleSignOut = async () => {
+    try {
+      await GoogleSignin.signOut();
+      setSuccess(null); // Remember to remove the user from your app's state as well
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <View>
-      <TouchableOpacity style={styles.btnstyle} onPress={GoogleLogin}>
-        <Text>Google Login</Text>
-      </TouchableOpacity>
+      {success !=null && <Text style={{color: 'white'}}>{success.user.name}</Text>}
+      {success !=null && <Text style={{color: 'white'}}>{success.user.email}</Text>}
+      {success !=null && <Image source={{uri:success.user.photo}} style={{width:100, height:100}}/>}
+
+      {success == null ? (<TouchableOpacity style={styles.btnstyle} onPress={() => { GoogleLogin() }}>
+        <Text>Sign In</Text>
+      </TouchableOpacity>) : (<TouchableOpacity style={styles.btnstyle} onPress={() => { GoogleSignOut() }}>
+        <Text>Sign Out</Text>
+      </TouchableOpacity>)}
+
+
     </View>
   );
 }

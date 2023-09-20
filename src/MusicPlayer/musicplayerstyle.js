@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#191414',
+      // marginLeft: 70
     },
     musicTitle: {
       fontSize: 22,
@@ -11,9 +12,8 @@ export const styles = StyleSheet.create({
       fontWeight: '500',
       marginTop: 12,
       marginHorizontal: 20,
-      marginBottom: 1,
-      alignItems: 'center',
-      justifyContent: 'center'
+      // marginLeft: 90,
+      marginBottom: 1
     },
     artisteTitle: {
       fontSize: 16,
@@ -24,13 +24,14 @@ export const styles = StyleSheet.create({
       marginTop: 1,
     },
     widgetContainer: {
+      backgroundColor: '#191414',
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
       paddingHorizontal: 0,
       height: 60,
       width: '100%',
-      backgroundColor: '#5E5A5A',
+      // backgroundColor: '#5E5A5A',
     },
     widgetMusicTitle: {
       fontSize: 18,
@@ -70,5 +71,28 @@ export const styles = StyleSheet.create({
       borderRadius: 40,
       alignSelf: 'center',
       backgroundColor: '#1DB954',
+    },
+    horizontalscroll: {
+      borderRadius: 9,
+      backgroundColor: 'blue',
+      alignItems: 'center'
+    },
+    sectionHeader: {
+      fontWeight: '800',
+      fontSize: 18,
+      color: '#f4f4f4',
+      marginTop: 20,
+      marginBottom: 5,
+    },
+    item: {
+      margin: 10,
+    },
+    itemPhoto: {
+      width: 200,
+      height: 200,
+    },
+    itemText: {
+      color: 'rgba(255, 255, 255, 0.5)',
+      marginTop: 5,
     },
   });

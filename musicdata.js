@@ -10,7 +10,7 @@ export const musiclibrary = [
       duration: 105, // Duration in seconds
     },
     {
-      url: 'https://www.bensound.com/bensound-music/bensound-anewbeginning.mp3',
+      url: 'https://www.youtube.com/watch?v=PITeLcdfDF8',
       title: 'Punky',
       artist: 'Benjamin Tissot',
       album: "Bensound's rock",
@@ -20,7 +20,7 @@ export const musiclibrary = [
       duration: 126, // Duration in seconds
     },
     {
-      url: 'https://www.bensound.com/bensound-music/bensound-actionable.mp3',
+      url: 'https://www.youtube.com/watch?v=kE7fjrbmJ0s',
       title: 'Actionable',
       artist: 'Benjamin Tissot',
       album: "Bensound's rock",
@@ -30,7 +30,7 @@ export const musiclibrary = [
       duration: 122, // Duration in seconds
     },
     {
-      url: 'https://www.bensound.com/bensound-music/bensound-romantic.mp3',
+      url: 'https://www.youtube.com/watch?v=MpqV9rWAsAs',
       title: 'Romantic',
       artist: 'Benjamin Tissot',
       album: "Bensound's Jazz",
@@ -40,7 +40,7 @@ export const musiclibrary = [
       duration: 236, // Duration in seconds
     },
     {
-      url: 'https://www.bensound.com/bensound-music/bensound-allthat.mp3',
+      url: 'https://www.youtube.com/watch?v=bXhBtFmJP7c',
       title: 'All That',
       artist: 'Benjamin Tissot',
       album: "Bensound's Jazz",
@@ -50,7 +50,7 @@ export const musiclibrary = [
       duration: 146, // Duration in seconds
     },
     {
-      url: 'https://www.bensound.com/bensound-music/bensound-love.mp3',
+      url: 'https://www.youtube.com/watch?v=86qbrKEnxL4',
       title: 'Love',
       artist: 'Benjamin Tissot',
       album: "Bensound's Jazz",
@@ -60,7 +60,7 @@ export const musiclibrary = [
       duration: 335, // Duration in seconds
     },
     {
-      url: 'https://www.bensound.com/bensound-music/bensound-dreams.mp3',
+      url: 'https://www.youtube.com/watch?v=x9fZPtKfPP4',
       title: 'Dreams',
       artist: 'Benjamin Tissot',
       album: "Bensound's Electronica",
@@ -70,7 +70,7 @@ export const musiclibrary = [
       duration: 310, // Duration in seconds
     },
     {
-      url: 'https://www.bensound.com/bensound-music/bensound-dance.mp3',
+      url: 'https://www.youtube.com/watch?v=ybIHN1Ps6s4',
       title: 'Love',
       artist: 'Benjamin Tissot',
       album: "Bensound's Electronica",

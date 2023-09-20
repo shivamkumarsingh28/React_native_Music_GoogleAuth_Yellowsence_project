@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   View,
   Text,
@@ -6,24 +6,15 @@ import {
   Linking,
   Pressable,
   Image,
-  SafeAreaView,
-  TouchableOpacity,
+  SectionList,
+  SafeAreaView
 } from 'react-native';
 import {musiclibrary} from '../../musicdata';
+import {SECTIONS} from './Data';
 import LinearGradient from 'react-native-linear-gradient';
-import TrackPlayerScreen from './PlayerScreen/TrackPlayerScreen';
-import PlayIcon from '../../assets/icons/play.png';
-import PauseIcon from '../../assets/icons/pause.png';
 import { styles } from './musicplayerstyle';
 
-export default function Musicplayerui() {
-  const [selectedMusic, setSelectedMusic] = useState(null);
-  const [selectedMusicIndex, setSelectedMusicIndex] = useState(null);
-  const [isPlayerModalVisible, setisPlayerModalVisible] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [timestamp, setTimestamp] = useState(0);
-  const [mode, setMode] = useState('shuffle');
-
+export default function Musicplayerui({navigation}) {
 
   const PlaylistImageView = () => (
     <>
@@ -35,48 +26,15 @@ export default function Musicplayerui() {
           source={{uri: 'https://www.bensound.com/bensound-img/punky.jpg'}}
         />
       </LinearGradient>
-      <TouchableOpacity style={styles.shuffleButtonContainer}>
-        <Text style={[styles.shuffleButton]}>SHUFFLE PLAY</Text>
-      </TouchableOpacity>
     </>
   );
 
-  const onSelectTrack = async (selectedTrack, index) => {
-    setSelectedMusic(selectedTrack);
-    setTimestamp(0);
-    setSelectedMusicIndex(index);
-    // remove TrackPlayer.skip(index);
-    // playOrPause();
-  };
-
-  const playOrPause = async () => {
-    setIsPlaying(!isPlaying);
-  };
-  const onSeekTrack = newTimeStamp => {
-    setTimestamp(newTimeStamp);
-  };
-  const onPressNext = () => {
-    setTimestamp(0);
-    setSelectedMusic(
-      musiclibrary[(selectedMusicIndex + 1) % musiclibrary.length],
-    );
-    setSelectedMusicIndex(selectedMusicIndex + 1);
-  };
-  const onPressPrev = () => {
-    if (selectedMusicIndex === 0) {
-      return;
-    }
-    setTimestamp(0);
-    setSelectedMusic(
-      musiclibrary[(selectedMusicIndex - 1) % musiclibrary.length],
-    );
-    setSelectedMusicIndex(selectedMusicIndex - 1);
-  };
-  const renderSingleMusic = ({item, index}) => {
+const renderSingleMusic = ({item, index}) => {
     return (
       <>
         {index === 0 && <PlaylistImageView />}
-        <Pressable onPress={() => onSelectTrack(item, index)}>
+        <Pressable onPress={() => {
+          Linking.openURL(item.url); }}>
           <View>
             <Text style={styles.musicTitle}>{item.title}</Text>
             <Text style={styles.artisteTitle}>{item.artist}</Text>
@@ -86,62 +44,69 @@ export default function Musicplayerui() {
     );
   };
 
-
+const ListItem = ({ item }) => {
+    return (
+      <View style={styles.item}>
+        <Image
+          source={{
+            uri: item.uri,
+          }}
+          style={styles.itemPhoto}
+          resizeMode="cover"
+          onPress={() => {
+            Linking.openURL(item.url); }}
+        />
+        <Text onPress={() => {
+            Linking.openURL(item.url); }} style={styles.itemText}>{item.text}</Text>
+      </View>
+    );
+  };
 
   return (
+  <>
     <View style={styles.container}>
       <SafeAreaView />
-      {selectedMusic && (
-        <TrackPlayerScreen
-          onCloseModal={() => setisPlayerModalVisible(false)}
-          isVisible={isPlayerModalVisible}
-          isPlaying={isPlaying}
-          playOrPause={playOrPause}
-          selectedMusic={selectedMusic}
-          onSeekTrack={onSeekTrack}
-          timestamp={timestamp}
-          onPressNext={onPressNext}
-          onPressPrev={onPressPrev}
-          playbackMode={mode} onClickLoop={()=> mood === "loop" ? setMode("loop") : setMode("off")}
-        />
-      )}
-      <View style={[styles.widgetContainer, {justifyContent: 'center'}]}>
+      
+      <View style={[styles.widgetContainer]}>
         <Text style={styles.musicTitle} onPress={() => {
-              Linking.openURL('https://aboutreact.com'); }}>My music</Text>
+              Linking.openURL('https://www.youtube.com/channel/UC03GH9NoxcHMtnDRTG6hZcQ'); }}>My Music Channel</Text>
       </View>
       <FlatList
         data={musiclibrary}
         keyExtractor={item => item.url}
         renderItem={renderSingleMusic}
-      />
-      {selectedMusic && (
-        <Pressable onPress={() => setisPlayerModalVisible(true)}>
-          <View style={[styles.widgetContainer, {}]}>
-            <View style={{flexDirection: 'row'}}>
-              <Image
-                resizeMode="cover"
-                source={{uri: selectedMusic.artwork}}
-                style={styles.widgetImageStyle}
-              />
-              <View>
-                <Text style={styles.widgetMusicTitle}>
-                  {selectedMusic.title}
-                </Text>
-                <Text style={styles.widgetArtisteTitle}>
-                  {selectedMusic.artist}
-                </Text>
-              </View>
-            </View>
-            <Pressable onPress={() => playOrPause()}>
-              <Image
-                source={isPlaying ? PauseIcon : PlayIcon} style={{height: 30, tintColor: '#fff', width: 30}}
-              />
-            </Pressable>
-          </View>
-        </Pressable>   
-        )}
-   
+      /> 
+      </View>
+
+<View style={styles.container}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <SectionList
+          contentContainerStyle={{ paddingHorizontal: 10 }}
+          stickySectionHeadersEnabled={false}
+          sections={SECTIONS}
+          renderSectionHeader={({ section }) => (
+            <>
+              <Text style={styles.sectionHeader}>{section.title}</Text>
+              {section.horizontal ? (
+                <FlatList
+                  horizontal
+                  data={section.data}
+                  renderItem={({ item }) => <ListItem item={item} />}
+                  showsHorizontalScrollIndicator={false}
+                />
+              ) : null}
+            </>
+          )}
+          renderItem={({ item, section }) => {
+            if (section.horizontal) {
+              return null;
+            }
+            return <ListItem item={item} />;
+          }}
+        />
+      </SafeAreaView>
     </View>
-    
+    </>
   );
 }
+
